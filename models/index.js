@@ -1,19 +1,22 @@
-const mongodb = require('mongodb');
 const mongoose = require('mongoose');
 var  Schema = mongoose.Schema
 
 var studentSchema = new Schema({
     student_id:{type:String,required:true},
     student_name:{type:String,required:true},
+    student_email:{type:String},
     standard:{type:Number,required:true},
     team:{type:Schema.Types.ObjectId, ref:'team'},
-    skill_marks:{type:Schema.Types.ObjectId, ref:'skills'},
-    challenge_marks:{type:Schema.Types.ObjectId, ref:'challenges'}
+    skill_marks:{type:Schema.Types.ObjectId, ref:'marks'},
+    challenge_marks:{type:Schema.Types.ObjectId, ref:'marks'}
 },{timestamps:true})
 
 var volunteerSchema = new Schema({
     volunteer_id:{type:String,required:true},
     volunteer_name:{type:String,required:true},
+    volunteer_email:{type:String,required:true},
+    volunteer_password:{type:String,required:true},
+    volunteer_role:{type:String,enum:["ADMIN","USER","SUPER_ADMIN"]},
     volunteer_team:{type:Schema.Types.ObjectId,ref:'team'},
 })
 
@@ -108,10 +111,68 @@ var evaluationSchema = new Schema({
     }
 })
 
-module.exports ={
+var markSchema = new Schema({
+ student_id:{type:Schema.Types.ObjectId, ref:'student'},
+ skill_marks:{
+    cognitive_skills:{
+        problem_solve:{type:Number,default:0},
+        critical_think:{type:Number,default:0},
+        creation:{type:Number,default:0},
+        communication:{type:Number,default:0}
+    },
+    behavioural_skills:{
+        listening:{type:Number,default:0},
+        patience:{type:Number,default:0},
+        re_silence:{type:Number,default:0},
+        risk_talking:{type:Number,default:0}
+    },  
+    team_skills:{
+        organising:{type:Number,default:0},
+        collaboration:{type:Number,default:0},
+        time_management:{type:Number,default:0},
+        craftmanship:{type:Number,default:0}
+    },
+    leadership_skills:{
+        lead:{type:Number,default:0},
+        motivate:{type:Number,default:0},
+        productive:{type:Number,default:0},
+        initiate:{type:Number,default:0}
+    }
+},
+challenge_marks:{
+    cognitive_skills:{
+        problem_solve:{type:Number,default:0},
+        critical_think:{type:Number,default:0},
+        creation:{type:Number,default:0},
+        communication:{type:Number,default:0}
+    },
+    behavioural_skills:{
+        listening:{type:Number,default:0},
+        patience:{type:Number,default:0},
+        re_silence:{type:Number,default:0},
+        risk_talking:{type:Number,default:0}
+    },
+    team_skills:{
+        organising:{type:Number,default:0},
+        collaboration:{type:Number,default:0},
+        time_management:{type:Number,default:0},
+        craftmanship:{type:Number,default:0}
+    },
+    leadership_skills:{
+        lead:{type:Number,default:0},
+        motivate:{type:Number,default:0},
+        productive:{type:Number,default:0},
+        initiate:{type:Number,default:0}
+    }
+}
+})
+
+module.exports = {
     Student: mongoose.model('student',studentSchema),
     Volunteer: mongoose.model('volunteer',volunteerSchema),
     Evaluation: mongoose.model('evaluation',evaluationSchema),
     House:mongoose.model('house',houseSchema),
-    Team:mongoose.model('team',teamSchema)
+    Team:mongoose.model('team',teamSchema),
+    Marks:mongoose.model('marks',markSchema)
 }
+

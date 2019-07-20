@@ -3,10 +3,10 @@ const path = require('path');
 const mongoose = require('mongoose');       
 const bodyParser = require('body-parser');
 const exphbs  = require('express-handlebars');
-const Swag = require('swag');
+//const Swag = require('swag');
 const Handlebars = require('handlebars');
 var url = require('./url');
-Swag.registerHelpers(Handlebars);
+//Swag.registerHelpers(Handlebars);
 mongoose.connect('mongodb://localhost:27017/host',{useNewUrlParser:true});
 
 var app = express();
@@ -29,3 +29,4 @@ app.set('view engine', 'handlebars');
 
 app.use('/',url);
 app.listen(2321,console.log('server listening'));
+
