@@ -20,7 +20,7 @@ hbs = exphbs.create({
   handlebars: handlebars, //Pass the Handlebar instance with Swag
 });
 
-app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.engine('handlebars', hbs.engine);
 app.set('views',path.join(__dirname,'views'));
 app.set('view engine', 'handlebars');

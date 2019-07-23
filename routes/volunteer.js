@@ -64,38 +64,37 @@ const createVolunteer = function(req,res,next){
 
 }
 
-const uploadFile = (req,res,next)=>{
-    console.log(req,"req")
-    var file = req.file
-    console.log(file,"file")
-    var NOTE_UPLOAD_DIR = '../public/files/'
-    var year = moment().format('YYYY-DD');
+// const uploadFile = (req,res,next)=>{
+//     var file = req.file
+//     console.log(file,"file")
+//     var NOTE_UPLOAD_DIR = '../public/files/'
+//     var year = moment().format('YYYY-DD');
 
-    var is_folder_exists = fs.existsSync(path.join(__dirname, NOTE_UPLOAD_DIR + year ))
+//     var is_folder_exists = fs.existsSync(path.join(__dirname, NOTE_UPLOAD_DIR + year ))
 
-    console.log(file,"fff")
-    if(!is_folder_exists) {
-        // CREATE FOLDER
-        console.log("ddddddd")
-        fs.mkdirSync(path.join(__dirname, NOTE_UPLOAD_DIR + year))
-    }
-    var file_path = NOTE_UPLOAD_DIR +year ;
+//     console.log(file,"fff")
+//     if(!is_folder_exists) {
+//         // CREATE FOLDER
+//         console.log("ddddddd")
+//         fs.mkdirSync(path.join(__dirname, NOTE_UPLOAD_DIR + year))
+//     }
+//     var file_path = NOTE_UPLOAD_DIR +year ;
    
-    fs.writeFile(path.join(__dirname,file_path),file, function(err,data) {
-        if (err){
-            console.log(err,"err")
-        }
-        else{
-            console.log(data, req.file)
-            DataExtract(req.file);
-            return res.render('createwords',{message:"Successfully uploaded"})
-        }
-    });
-}
+//     fs.readFile(path.join(__dirname,file_path), function(err,data) {
+//         if (err){
+//             console.log(err,"err")
+//         }
+//         else{
+//             console.log(data, req.file)
+//             // DataExtract(req.file);
+//             return res.render('creation',{message:"Successfully uploaded"})
+//         }
+//     });
+// }
 
-const getUploadFile = function(req,res,next){
-  return res.render('createwords');
-}
+// const getUploadFile = function(req,res,next){
+//   return res.render('createwords');
+// }
 
 
 // var storage = multer.diskStorage({
@@ -153,8 +152,8 @@ const getUploadFile = function(req,res,next){
 module.exports ={
     createVolunteer:createVolunteer,
     getCreation:getCreation,
-    uploadFile:uploadFile,
-    getUploadFile:getUploadFile,
+    // uploadFile:uploadFile,
+    // getUploadFile:getUploadFile,
     // DataExtract:DataExtract
 }
 
