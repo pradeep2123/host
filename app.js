@@ -7,7 +7,7 @@ const Swag = require('swag');
 const handlebars = require('handlebars');
 var url = require('./url');
 Swag.registerHelpers(handlebars);
-mongoose.connect('mongodb://localhost:27017/host',{useNewUrlParser:true});
+mongoose.connect('mongodb://localhost:27017/pradeep',{useNewUrlParser:true});
 
 var app = express();
 
@@ -26,5 +26,5 @@ app.set('views',path.join(__dirname,'views'));
 app.set('view engine', 'handlebars');
 
 app.use('/',url);
-app.listen(1990,console.log('server listening'));
+app.listen(2001,console.log('server listening'));
 

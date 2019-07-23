@@ -4,7 +4,7 @@ const moment = require('moment');
 const bodyParser = require('body-parser');
 const path = require('path')
 const multer = require('multer')
-const xlsx = require('xlsx');
+// const xlsx = require('xlsx');
 const fs = require('fs');
 const db = require('../models/index');
 const app = express.Router();
@@ -98,51 +98,51 @@ const getUploadFile = function(req,res,next){
 }
 
 
-var storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, path.join(__dirname,'public/files'))
-    },
-    filename: (req, file, cb) => {
-    var year = moment().format('YYYY-DD');
-      cb(null, file.fieldname + '-' + year)
-    }
-});
+// var storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//       cb(null, path.join(__dirname,'public/files'))
+//     },
+//     filename: (req, file, cb) => {
+//     var year = moment().format('YYYY-DD');
+//       cb(null, file.fieldname + '-' + year)
+//     }
+// });
 
-var upload = multer({storage: storage});
-app.post('/uploadfile', upload.single('file'), (req, res, next) => {
-    const files = req.file
-    console.log(files)
-    if (!file) {
-      const error = new Error('Please upload a file')
-      error.httpStatusCode = 400
-      return next(error)
-    }
-    console.log(file)
-      return res.send('ffff')
+// var upload = multer({storage: storage});
+// app.post('/uploadfile', upload.single('file'), (req, res, next) => {
+//     const files = req.file
+//     console.log(files)
+//     if (!file) {
+//       const error = new Error('Please upload a file')
+//       error.httpStatusCode = 400
+//       return next(error)
+//     }
+//     console.log(file)
+//       return res.send('ffff')
     
-  })
-const DataExtract = function(req,res,next){
-    var filePath = 'D:\node-projects\thamaku\Book1.xlsx'
-    var workbook = new Excel.Workbook();
-    //Use then function to executed code that need to perform immediately after readFile
-    workbook.xlsx.readFile(filePath).then(function () {
-    //Use sheetName in getWorksheet function
-    var worksheet = workbook.getWorksheet("SheetInfo");
-    //Use nested iterator to read cell in rows 
-    //First iterator for rows in sheet
-        worksheet.eachRow({ includeEmpty: false }, function (row, rowNumber) {
-            console.log("Current Row:" + rowNumber);
-            //Second iterator for cells in row
-            row.eachCell({ includeEmpty: false }, function (cell, colNumber) {
-            //print row number, column number and cell value at[row][col]
+//   })
+// const DataExtract = function(req,res,next){
+//     var filePath = 'D:\node-projects\thamaku\Book1.xlsx'
+//     var workbook = new Excel.Workbook();
+//     //Use then function to executed code that need to perform immediately after readFile
+//     workbook.xlsx.readFile(filePath).then(function () {
+//     //Use sheetName in getWorksheet function
+//     var worksheet = workbook.getWorksheet("SheetInfo");
+//     //Use nested iterator to read cell in rows 
+//     //First iterator for rows in sheet
+//         worksheet.eachRow({ includeEmpty: false }, function (row, rowNumber) {
+//             console.log("Current Row:" + rowNumber);
+//             //Second iterator for cells in row
+//             row.eachCell({ includeEmpty: false }, function (cell, colNumber) {
+//             //print row number, column number and cell value at[row][col]
             
-            /*
-                write code
-            */
-            });
-        });
-    });
-}
+//             /*
+//                 write code
+//             */
+//             });
+//         });
+//     });
+// }
 
 
 
@@ -155,7 +155,7 @@ module.exports ={
     getCreation:getCreation,
     uploadFile:uploadFile,
     getUploadFile:getUploadFile,
-    DataExtract:DataExtract
+    // DataExtract:DataExtract
 }
 
 

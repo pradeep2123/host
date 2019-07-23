@@ -6,7 +6,7 @@ var studentSchema = new Schema({
     student_name:{type:String,required:true},
     student_email:{type:String},
     standard:{type:Number,required:true},
-    photo:{type:URL,required:true},
+    photo:{type:String},
     team:{type:String, required:true},
     house_name:{type:String,required:true},
     challenge_marks:[
@@ -14,7 +14,7 @@ var studentSchema = new Schema({
         challenge_type:{type:String,enum:["C1","C2"]},
         cognitive_skills:{
             cog_total_ponts:{type:Number,default:0},
-            cog_average:{type:Float32Array,default:0},
+            cog_average:{type:Number,default:0},
             problem_solve:{type:Number,default:0},
             critical_think:{type:Number,default:0},
             creation:{type:Number,default:0},
@@ -22,7 +22,7 @@ var studentSchema = new Schema({
         },
         behavioural_skills:{
             beh_total_ponts:{type:Number,default:0},
-            beh_average:{type:Float32Array,default:0},
+            beh_average:{type:Number,default:0},
             listening:{type:Number,default:0},
             patience:{type:Number,default:0},
             re_silence:{type:Number,default:0},
@@ -30,7 +30,7 @@ var studentSchema = new Schema({
         },  
         team_skills:{
             team_total_ponts:{type:Number,default:0},
-            team_average:{type:Float32Array,default:0},
+            team_average:{type:Number,default:0},
             organising:{type:Number,default:0},
             collaboration:{type:Number,default:0},
             time_management:{type:Number,default:0},
@@ -38,7 +38,7 @@ var studentSchema = new Schema({
         },
         leadership_skills:{
             lead_total_ponts:{type:Number,default:0},
-            lead_average:{type:Float32Array,default:0},
+            lead_average:{type:Number,default:0},
             lead:{type:Number,default:0},
             motivate:{type:Number,default:0},
             productive:{type:Number,default:0},
