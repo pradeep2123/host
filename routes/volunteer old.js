@@ -95,6 +95,43 @@ const getUploadFile = function(req,res,next){
   return res.render('home.handlebars');
 }
 
+app.get('/download', function(req, res){
+    const file = `${__dirname}/zip/example.zip`;
+    res.download(file); // Set disposition and send it.
+  });
+  
+  var storage =   multer.diskStorage({
+    destination: function (req, file, callback) {
+      callback(null, './uploads');
+    },
+    filename: function (req, file, callback) {
+      callback(null, file.fieldname + '-' + Date.now());
+    }
+  });
+  var upload = multer({ storage : storage}).single('userPhoto');
+  app.get('/',function(req,res){
+    res.sendFile(path.join(__dirname+"/views/home.html"));
+  
+  });
+  
+  app.post('/api/photo',function(req,res){
+  upload(req,res,function(err) {
+    console.log(req.file,"req.file");
+      if(err) {
+          return res.end("Error uploading file.");
+      }
+      var workbook = xlsx.read(req.file.originalname);
+  const sheet_name = workbook.SheetNames;
+  console.log(xlsx.utils.sheet_to_json(workbook.Sheets[sheet_name[0]]))
+      res.end("File is uploaded");
+  });
+  });
+  
+  const DataExtract = function(val){
+  
+  }
+  
+  
 
 module.exports ={
     createVolunteer:createVolunteer,
